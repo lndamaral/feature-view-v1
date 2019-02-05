@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Feature View</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+	</head>
+	<script>
+			var features = JSON.parse('{{ features | tojson | safe }}');
+			var menu = JSON.parse('{{ menu | tojson | safe }}');
+	</script>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+
+						<div class="inner">
+							
+								<header id="header">
+									<a href="#" class="logo"><strong>Feature</strong> View</a>
+									<ul class="icons">
+										<li><a href="#" class="icon fa-file-pdf-o"><span class="label">PDF</span></a></li>
+									</ul>
+								</header>
+	
+								<section id="banner">
+									<div class="content">
+										<header>
+											<h1>{{ features.feature.name }}</h1>
+										</header>
+										<p>
+											{% for text in features.feature.description.split('\n') %}
+												<p>{{text}}</p>	
+											{% endfor %}
+										</p>
+									</div>
+								</section>
+
+								<section>
+									{% for children in features.feature.children %}
+										<h3> <b>{{ children.keyword + ": " }}</b> {{ children.name }}</h3>
+										<div class="box">
+											<p>
+												{% for steps in children.steps %}
+													<b>{{ steps.keyword }}</b> {{ steps.text }}</br>
+												{% endfor %}
+											</p>
+										</div>
+									{% endfor %}
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li>
+											<span class="opener">Proposal Injection</span>
+											<ul>
+												<li><a href="#">Lorem Dolor</a></li>
+												<li><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Order Management</span>
+											<ul>
+												<li><a href="#">Lorem Dolor</a></li>
+												<li><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+
+										{% for m in menu %}
+											<li><a href="{{ m }}">{{ m }}</a></li>
+										{% endfor %}
+										
+									</ul>
+								</nav>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; All rights reserved. <a href="https://github.com/lndamaral">Leonardo Amaral</a></p>
+								</footer>
+						</div>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+			
+	</body>
+</html>
